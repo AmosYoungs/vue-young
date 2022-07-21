@@ -1,0 +1,40 @@
+
+<template>
+    <div class="tp-flex">
+        <van-list>
+            <van-cell v-for="item in demoList" :key="item.name" :title="item.name" @click="goToPage(item)"> </van-cell>
+        </van-list>
+     
+    </div>
+</template>
+
+<script>
+import Vue from 'vue';
+import { List,Cell} from 'vant';
+
+Vue.use(List);
+Vue.use(Cell);
+
+export default {
+    name: 'index',
+    components: {
+
+    },
+    data() {
+        return {
+            demoList:[{
+                name:'拍照',
+                routerName:'showCamera'
+            }]
+        }
+    },
+    methods:{
+        goToPage(item){
+            this.$router.push({name:item.routerName})
+        }
+    },
+    mounted(){
+        console.log('333')
+    }
+}
+</script>
