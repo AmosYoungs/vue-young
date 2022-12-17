@@ -1,7 +1,7 @@
 const path = require('path')
 const resolve = dir => { return path.join(__dirname, dir) }
 const { defineConfig } = require('@vue/cli-service')
-// const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const { config } = require('process')
 console.log(process.env.NODE_ENV)
 module.exports = defineConfig({
@@ -28,14 +28,14 @@ module.exports = defineConfig({
       chunkFilename: 'js/[id]-[chunkhash:8].js'
     },
     plugins: [
-      // new CopyWebpackPlugin({
-      //   patterns: [
-      //     {
-      //       from: __dirname + '/static',
-      //       to: __dirname + '/young/static/'
-      //     }
-      //   ]
-      // })
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.join(__dirname, 'static'),
+            to: path.join(__dirname, 'young/static/')
+          }
+        ]
+      })
     ]
   },
   chainWebpack: config => {
