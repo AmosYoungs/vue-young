@@ -1,4 +1,5 @@
 
+
 <template>
     <div class="tp-flex">
         <van-list>
@@ -25,7 +26,14 @@ export default {
             demoList:[{
                 name:'拍照',
                 routerName:'showCamera'
-            }]
+            },
+            {
+                name:'电子签名',
+                routerName:'eSignature'
+
+            }
+            
+            ]
         }
     },
     methods:{

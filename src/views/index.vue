@@ -13,9 +13,8 @@
 
 <script>
 import Vue from 'vue'
-// @ is an alias to /src
-import home from '@/components/index/ home.vue'
-import demo from '@/components/index/demo.vue';
+import home from '@/views/index/ home.vue'
+import demo from '@/views/index/demo.vue';
 import { Tabbar, TabbarItem } from 'vant';
 
 Vue.use(Tabbar);

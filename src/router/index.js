@@ -14,6 +14,11 @@ const routes = [
     path:'/showCamera',
     name:'showCamera',
     component: ()=> import('../views/demoPage/showCamera.vue')
+  },// 
+  {
+    path:'/eSignature',
+    name:'eSignature',
+    component: ()=> import('../views/demoPage/eSignature.vue')
   }
 ]
 

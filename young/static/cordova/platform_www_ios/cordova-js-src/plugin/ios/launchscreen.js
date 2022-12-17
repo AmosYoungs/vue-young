@@ -1,1 +1,0 @@
-var exec=require("cordova/exec"),launchscreen={show:function(){exec(null,null,"LaunchScreen","show",[])},hide:function(){exec(null,null,"LaunchScreen","hide",[])}};module.exports=launchscreen;
