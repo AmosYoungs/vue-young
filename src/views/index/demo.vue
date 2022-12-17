@@ -24,13 +24,12 @@ export default {
     data() {
         return {
             demoList:[{
-                name:'拍照',
+                name:'拍照测试',
                 routerName:'showCamera'
             },
             {
                 name:'电子签名',
                 routerName:'eSignature'
-
             }
             
             ]
