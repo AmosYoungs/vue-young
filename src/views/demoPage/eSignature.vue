@@ -1,72 +1,73 @@
 <template>
-    <div>
-        <div class="sign-area">
-             <ElesignCode ref="signCode"  :pen="pen"/>  
-        </div>
-        <div class="footer">
-            <button @click="clear">清空</button>
-             <button @click="undo">撤销</button>
-              <button @click="save">保存</button>
-        </div>
+  <div>
+    <div class="sign-area">
+      <vue-esign
+        ref="esign"
+        id="signCanvas"
+        
+        :lineWidth="lineWidth"
+      />
+      <!-- vue3 -->
     </div>
+    <div class="footer">
+      <button @click="clear">清空</button>
+
+      <button @click="save">保存</button>
+    </div>
+  </div>
 </template>
 
 <script>
-
-import ElesignCode from  "elesigncode/lib/core/elesigncode.vue"    
+import vueEsign from "vue-esign";
 export default {
-    
-    components: {
-        ElesignCode
+  components: {
+    vueEsign,
+  },
+  data() {
+    return {
+      lineWidth: 6,
+     
+    };
+  },
+  //监听属性 类似于data概念
+  computed: {},
+  //监控data中的数据变化
+  watch: {},
+  mounted(){
+  document.querySelector('#signCanvas').style.height = document.documentElement.clientHeight - 60;
+console.log(document.querySelector('#signCanvas').style.height,document.documentElement.clientHeight - 60)
+document.querySelector('#signCanvas').style.width = document.documentElement.clientWidth;
+
+  },
+
+  methods: {
+    clear() {
+      this.$refs.esign.reset();
     },
-    data() {
-        
-        return {
-            pen:'default'
-        };
-    },
-    //监听属性 类似于data概念
-    computed: {},
-    //监控data中的数据变化
-    watch: {},
-    
-    methods: {
-        clear(){
-            this.$refs.signCode.clear();
-        },
-        undo(){
-            this.$refs.signCode.undo();
-        },
-        save(){
-           let img =  this.$refs.signCode.toPng();
-           console.log(img)
-        }
-        
-    },
-    //生命周期 - 创建完成（可以访问当前this实例）
-    created() {
-        
-    },
-    //生命周期 - 挂载完成（可以访问DOM元素）
-    mounted() {
-        
-    },
-    beforeRouteEnter(to, from, next) {
-        next(vm=>{
-            console.log('e-signature')
+
+    save() {
+      this.$refs.esign
+        .generate()
+        .then((res) => {
+          console.log(res); // base64图片
         })
-    }, 
-    }
+        .catch((err) => {
+          alert(err); // 画布没有签字时会执行这里 'Not Signned'
+        });
+    },
+  },
+ 
+};
 </script>
 <style lang="less" scoped>
-.sign-area{
-    height: calc(100% - 3rem);
+.sign-area {
+  height: calc(100% - 3rem);
 }
-    .footer{
-        height: 3rem;
-        display: flex;
-        button { 
-            flex:1
-        }
-    }
+.footer {
+  height: 60px;
+  display: flex;
+  button {
+    flex: 1;
+  }
+}
 </style>
