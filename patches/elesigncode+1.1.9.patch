@@ -1,0 +1,14 @@
+diff --git a/node_modules/elesigncode/lib/core/elesigncode.vue b/node_modules/elesigncode/lib/core/elesigncode.vue
+index baf8e83..bf68304 100644
+--- a/node_modules/elesigncode/lib/core/elesigncode.vue
++++ b/node_modules/elesigncode/lib/core/elesigncode.vue
+@@ -44,6 +44,9 @@ export default {
+         this.datas&&this.signcodeEx.jsonTo(this.datas)
+     },
+     methods:{
++        clear(){
++            this.signcodeEx.clear()
++        },
+         undo(){
+             this.signcodeEx.undo()
+         },
