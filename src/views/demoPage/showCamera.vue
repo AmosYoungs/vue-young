@@ -1,6 +1,6 @@
 
 <template>
-    <div class="tp-flex">
+    <div class="hy-flex">
 
         <van-button type="primary" @click="openCamera">打开相机</van-button>
     </div>

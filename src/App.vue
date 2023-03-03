@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view class="Router tp-flex tp-Page"></router-view >
+    <router-view class="Router hy-flex hy-Page"></router-view >
   </div>
 </template>
 

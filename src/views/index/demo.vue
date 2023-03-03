@@ -1,7 +1,7 @@
 
 
 <template>
-    <div class="tp-flex">
+    <div class="hy-flex">
         <van-list>
             <van-cell v-for="item in demoList" :key="item.name" :title="item.name" @click="goToPage(item)"> </van-cell>
         </van-list>

@@ -6,7 +6,7 @@
 -->
 
 <template>
-  <div class="tp-w-100">
+  <div class="hy-w-100">
     <van-swipe :autoplay="3000" :height="100" >
         <!-- v-for="(image, index) in images" -->
       <van-swipe-item  style="" v-for="(item,index) in 10" :key="index">

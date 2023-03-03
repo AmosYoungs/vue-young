@@ -10,7 +10,7 @@ html,body{
     -webkit-box-sizing: border-box;
 }
 
-.tp-Page {
+.hy-Page {
     /* position: fixed; */
     width: 100%;
     height: 100%;
@@ -19,18 +19,18 @@ html,body{
     flex-direction: column;
 }
 
-.tp-flex {
+.hy-flex {
     display: flex;
 }
 
-.tp-f1 {
+.hy-f1 {
     flex: 1;
 }
 
-.tp-w-100 {
+.hy-w-100 {
     width: 100%;
 }
 
-.tp-ac {
+.hy-ac {
     align-items: center;
 }
