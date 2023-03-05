@@ -1,6 +1,8 @@
 <template>
-    <div class="hy-flex">
-        <component :is="currentCom"></component>
+  
+    <div class="hy-flex" >
+       
+        <component class="flex-1" :is="currentCom"></component>
         <van-tabbar v-model="active">
             <van-tabbar-item  @click="currentCom='home'" icon="home-o">首页</van-tabbar-item>
             <van-tabbar-item @click="currentCom='demo'" icon="search">示例</van-tabbar-item>

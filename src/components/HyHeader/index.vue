@@ -1,16 +1,20 @@
 <template>
     <div class="hy-header hy-flex hy-ac">
         <div class="head-left">
-            <slot name="leftBtn"></slot>
-            <div v-show="showBack" @click="goBack">
+            <slot name="leftBtn">
+                <div v-show="showBack" @click="goBack">
                 <van-icon name="arrow-left" />
             </div>
+            </slot>
+            
         </div>
 
-        <div class="head-title">
+        <div class="head-title flex-1">
             <slot name="headTitle">{{title}}</slot>
         </div>
-        <div></div>
+        <div>
+            <slot name="rightBtn"></slot>
+        </div>
 
     </div>
 </template>
@@ -47,9 +51,11 @@ export default {
 
     methods: {
         goBack() {
-
+            this.$router.go(-1)
         }
-
     }
+}
 </script>
-<style scoped lang="less"></style>
+<style lang="less" scoped>
+
+</style>

@@ -1,20 +1,6 @@
 <template>
-  <div>
-    <!-- <div class="sign-area">
-      <vue-esign
-        ref="esign"
-        id="signCanvas"
-        :lineWidth="lineWidth"
-      />
-    </div>
-
-    <div class="footer">
-      <button @click="clear">清空</button>
-      <button @click="save">保存</button>
-    </div> -->
-    
-
-
+  <div class="page">
+    <hy-header :title="'电子签名'"></hy-header>
     <ElesignCode ref="signCode" :datas="datas" :pen="pen"></ElesignCode>
     <div class="operate-btns">
       <div @click="clearFn">清空</div>

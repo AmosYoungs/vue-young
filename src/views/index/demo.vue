@@ -1,10 +1,12 @@
 
 
 <template>
-    <div class="hy-flex">
-        <van-list>
-            <van-cell v-for="item in demoList" :key="item.name" :title="item.name" @click="goToPage(item)"> </van-cell>
-        </van-list>
+
+    <div class="page">
+         <hy-header :showBack="false" :title="'Code工厂'"></hy-header>
+        <hy-scroll >
+            <div v-for="(item,index) in demoList" :key="index" @click="goToPage(item)">{{item.name}}</div>
+        </hy-scroll>
      
     </div>
 </template>
@@ -41,7 +43,9 @@ export default {
         }
     },
     mounted(){
-        console.log('333')
+        for(let i=0;i<8;i++){
+            this.demoList = this.demoList.concat(this.demoList)
+        }
     }
 }
 </script>

@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view class="Router hy-flex hy-Page"></router-view >
+    <keep-alive>
+    <router-view class="Router hy-Page"></router-view >
+    </keep-alive>
   </div>
 </template>
 
@@ -15,5 +17,12 @@
 
 .Router{
   transition: all .2s ease-in-out;
+}
+.hy-Page {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    flex-direction: column;
 }
 </style>
