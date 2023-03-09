@@ -19,6 +19,12 @@ const routes = [
     path:'/eSignature',
     name:'eSignature',
     component: ()=> import('../views/demoPage/eSignature.vue')
+  },
+  {
+    path:'/rotateImg',
+    name:'rotateImg',
+    component: ()=> import('../views/demoPage/rotateImg.vue')
+
   }
 ]
 
@@ -27,5 +33,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+// 
 
 export default router

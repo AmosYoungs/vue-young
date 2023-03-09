@@ -32,6 +32,10 @@ export default {
             {
                 name:'电子签名',
                 routerName:'eSignature'
+            },
+            {
+                name:'图片旋转',
+                routerName:'rotateImg'
             }
             
             ]
@@ -39,13 +43,12 @@ export default {
     },
     methods:{
         goToPage(item){
+            console.log(item)
             this.$router.push({name:item.routerName})
         }
     },
     mounted(){
-        for(let i=0;i<8;i++){
-            this.demoList = this.demoList.concat(this.demoList)
-        }
+       
     }
 }
 </script>
