@@ -26,6 +26,12 @@ const routes = [
     component: ()=> import('../views/demoPage/rotateImg.vue')
 
   }
+  ,{
+    path:'/HaiBaChiOrder',
+    name:'HaiBaChiOrder',
+    component: ()=> import('../views/privateWork/HaiBaChiOrder.vue') 
+
+  }
 ]
 
 const router = new VueRouter({

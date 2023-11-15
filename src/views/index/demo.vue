@@ -36,6 +36,10 @@ export default {
             {
                 name:'图片旋转',
                 routerName:'rotateImg'
+            },
+            {
+                name:'HaiBaChiOrder',
+                routerName:'HaiBaChiOrder'
             }
             
             ]

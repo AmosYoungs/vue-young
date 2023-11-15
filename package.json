@@ -13,6 +13,7 @@
     "axios": "^0.27.2",
     "better-scroll": "^2.5.0",
     "core-js": "^3.8.3",
+    "element-ui": "^2.15.14",
     "elesigncode": "^1.1.9",
     "px2rem-custom": "^0.2.0",
     "vant": "^2.12.48",
