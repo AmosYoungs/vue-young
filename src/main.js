@@ -15,6 +15,8 @@ import './plugins/vant'
 import './assets/css/basic.css'
 import HyHeader from '@c/HyHeader'
 import HyScroll from '@c/HyScroll'
+import Vconsole from 'vconsole'
+new Vconsole()
 Vue.use(ElementUI);
 Vue.component('hy-header',HyHeader)
 Vue.component('hy-scroll',HyScroll)

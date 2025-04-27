@@ -12,13 +12,17 @@ module.exports = defineConfig({
   devServer: {
     open: true,
     host: '127.0.0.1',
-    port: 8085
-    // proxy:{
-    //   '/':{
-    //     target:'',
-    //     changeOrigin:true
-    //   }
-    // }
+    port: 8085,
+    proxy: {
+      '/api': {
+        target: 'http://47.95.8.42:6002',
+        changeOrigin: true
+      }
+      // '/':{
+      //   target:'',
+      //   changeOrigin:true
+      // }
+    }
 
   },
   configureWebpack: {

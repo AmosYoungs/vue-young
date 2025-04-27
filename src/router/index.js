@@ -30,7 +30,11 @@ const routes = [
     path:'/HaiBaChiOrder',
     name:'HaiBaChiOrder',
     component: ()=> import('../views/privateWork/HaiBaChiOrder.vue') 
-
+  },
+  {
+    path:'/harmoneyTest',
+    name:'harmoneyTest',
+    component: ()=> import('../views/demoPage/harmoneyTest.vue') 
   }
 ]
 

@@ -40,6 +40,10 @@ export default {
             {
                 name:'HaiBaChiOrder',
                 routerName:'HaiBaChiOrder'
+            },
+            {
+                name:'鸿蒙测试',
+                routerName:'harmoneyTest'
             }
             
             ]

@@ -3,40 +3,60 @@
     <div class="app-container">
       <div class="header-title">Hibachi Order Form</div>
       <div class="base-info">
-      <el-row  >
-        
-        <el-col :span="12" class="flex">
-          <span class="label">Booking Name：</span>
-          <el-input class="flex-1" v-model="order.bookingName"></el-input>
-        </el-col>
+        <el-row style="margin: 10px 0" :gutter="5">
+          <el-col :span="12" class="flex">
+            <span class="label">Booking Date</span>
+            <el-date-picker
+              v-model="order.bookingDate"
+              type="date"
+              style="width: 95%"
+              value-format="yyyy-MM-dd "
+              format="yyyy-MM-dd "
+              prefix-icon=""
+            >
+            </el-date-picker>
+          </el-col>
+          <el-col :span="12" class="flex">
+            <span class="label">Booking Time</span>
+            <el-select
+              style="width: 100%"
+              v-model="hour"
+              :placeholder="'Select'"
+            >
+              <el-option
+                :key="item.value"
+                :label="item.value"
+                :value="item.value"
+                v-for="item in hourOptions"
+              ></el-option>
+            </el-select>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12" class="flex">
+            <span class="label">Booking Name：</span>
+            <el-input class="flex-1" v-model="order.bookingName"></el-input>
+          </el-col>
 
-        <el-col :span="12" class="flex">
-          <span class="label">Booking Address：</span>
-          <el-input class="flex-1" v-model="order.bookingAddress"></el-input>
-        </el-col>
-      </el-row>
-      <el-row style="margin:10px 0">
-        <el-col :span="24" class="flex">
-          <span class="label">Booking Date</span>
-          <el-date-picker
-            v-model="order.bookingDate"
-            type="datetime"
-            style="width:95%"
-            value-format="yyyy-MM-dd HH:mm"
-            format="yyyy-MM-dd HH:mm"
-            prefix-icon=""
-          >
-          </el-date-picker>
-        </el-col>
-      </el-row>
+          <el-col :span="12" class="flex">
+            <span class="label">Booking Address：</span>
+            <el-input class="flex-1" v-model="order.bookingAddress"></el-input>
+          </el-col>
+        </el-row>
+        <el-row style="margin: 10px 0">
+          <el-col :span="12" class="flex">
+            <span class="label">Phone：</span>
+            <el-input class="flex-1" v-model="order.tel"></el-input>
+          </el-col>
+        </el-row>
       </div>
       <!-- 表格 -->
+
       <el-table
-        :data="order.orderDetail"
+        :data="order.orderDetailList"
         class="el-table"
         border
-        fit
-        height="75%"
+        height="60%"
         show-summary
         :summary-method="getSummaries"
       >
@@ -46,20 +66,37 @@
           align="center"
           :width="flexColumnWidth('No.', 'No.')"
         ></el-table-column>
-       
-        <el-table-column v-for="column in tablColumns" :prop="column.valuekey" :key="column.label" :label="column.label" :width="flexColumnWidth(column.valuekey, column.label)">
-          <template  slot-scope="scope" >
-            <el-input v-if="column.type=='input'" v-model="scope.row[column.valuekey]"> </el-input>
-            <el-input v-if="column.type=='textarea'" type="textarea" v-model="scope.row[column.valuekey]"> </el-input>
-           <el-input-number v-else-if="column.type=='number'" size="small" :min="0" v-model="scope.row[column.valuekey]">
+
+        <el-table-column
+          v-for="column in tablColumns"
+          :prop="column.valuekey"
+          :key="column.label"
+          :label="column.label"
+          :width="flexColumnWidth(column.valuekey, column.label)"
+        >
+          <template slot-scope="scope">
+            <el-input
+              v-if="column.type == 'input'"
+              v-model="scope.row[column.valuekey]"
+            >
+            </el-input>
+            <el-input
+              v-if="column.type == 'textarea'"
+              type="textarea"
+              v-model="scope.row[column.valuekey]"
+            >
+            </el-input>
+            <el-input-number
+              v-else-if="column.type == 'number'"
+              size="small"
+              :min="0"
+              v-model="scope.row[column.valuekey]"
+            >
             </el-input-number>
           </template>
-      </el-table-column>
-        <el-table-column
-          label="操作"
-          align="center"
-          width="110px"
-        >
+        </el-table-column>
+
+        <el-table-column label="操作" align="center" width="110px">
           <template slot-scope="scope">
             <el-button
               class="operate-button"
@@ -79,6 +116,40 @@
           </template>
         </el-table-column>
       </el-table>
+
+      <div class="total-info">
+        <div class="flex flex-jl">
+          <span class="addtion-title">Additional Notes:</span>
+        </div>
+        <el-row align="center" class="flex flex-ac" :gutter="5">
+          <el-col :span="24" class="flex">
+            <el-input class="flex-1" v-model="order.additionalNotes"></el-input>
+          </el-col>
+        </el-row>
+        <div class="flex flex-jl">
+          <span class="addtion-title">Extra side Order:</span>
+        </div>
+        <el-row style="margin-top: 10px" :gutter="5">
+          <el-col :span="12">
+            <div class="flex flex-ac">
+              <span class="label">Edamame</span>
+              <el-input-number
+                size="small"
+                v-model="order.edamame"
+              ></el-input-number>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="flex flex-ac">
+              <span class="label">Gvoza</span>
+              <el-input-number
+                size="small"
+                v-model="order.gyoza"
+              ></el-input-number>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
     </div>
     <div class="footer-div">
       <el-button
@@ -103,80 +174,91 @@
 
 
 <script>
-name = "MainVue";
+import axios from "axios";
 export default {
+  name: "MainVue",
   data() {
     return {
-      tablColumns:[
-      {
-        label:'name',
-        valuekey:'name',
-        type:'input',
-      },
-      {
-        label:'Veggie',
-        valuekey:'F0001',
-        type:'number',
-      },
-      {
-        label:'Chicken',
-        valuekey:'F0002',
-        type:'number',
-      },
-      {
-        label:'Shrimp',
-        valuekey:'F0003',
-        type:'number',
-      },
-      {
-        label:'Steak',
-        valuekey:'F0004',
-        type:'number',
-      },
+      hourOptions: [
         {
-        label:'Salmon',
-        valuekey:'F0005',
-        type:'number',
-      },
-      {
-        label:'Scallops',
-        valuekey:'F0006',
-        type:'number',
-      },
-      {
-        label:'Filet +$8',
-        valuekey:'F0007',
-        type:'number',
-      },
-      {
-        label:'Lobs +$15',
-        valuekey:'F0008',
-        type:'number',
-      },
-      {
-        label:'Allergies',
-        valuekey:'Allergies',
-        type:'textarea',
-      }
+          value: "12:00 pm Noon",
+        },
+        {
+          value: "1:00pm",
+        },
+        {
+          value: "3:00pm",
+        },
+        {
+          value: "4:00pm",
+        },
+        {
+          value: "5:00pm",
+        },
+        {
+          value: "7:00pm",
+        },
+        {
+          value: "7:30pm",
+        },
+        {
+          value: "8:00pm",
+        },
+        {
+          value: "9:00pm",
+        },
+        {
+          value: "10:00pm",
+        },
       ],
+      tablColumns: [
+        {
+          label: "name",
+          valuekey: "name",
+          type: "input",
+        },
+      ],
+      hour: "",
       order: {
+        tel: "",
         bookingDate: "",
         bookingName: "",
         bookingAddress: "",
-        orderDetail: [],
-      }, 
+        edamame: 0,
+        gyoza: 0,
+        additionalNotes: "",
+        orderDetailList: [],
+      },
     };
   },
-  created() {this.requestTableColumn()},
+  created() {
+    this.requestTableColumn();
+  },
   methods: {
-   requestTableColumn(){
-    // TODO 请求获取tablColumns
-    this.order.orderDetail.push(this.initRow())
-   },
+    requestTableColumn() {
+      axios.get("http://47.95.8.42:6002/api/food/list").then((result) => {
+        if (result.status == 200 && result.data.rtnCode === 200) {
+          let columns = result.data.data;
+          columns.forEach((item) => {
+            let obj = {
+              label: item.foodName,
+              valuekey: item.foodId,
+              type: "number",
+            };
+            this.tablColumns.push(obj);
+          });
+          this.tablColumns.push({
+            label: "Allergies",
+            valuekey: "Allergies",
+            type: "textarea",
+          });
+        }
+        this.order.orderDetailList.push(this.initRow());
+      });
+    },
     getSummaries(param) {
       const { columns, data } = param;
       const sums = [];
-      const idx = 0;
       columns.forEach((column, index) => {
         if (index === 0) {
           sums[index] = "Total Count";
@@ -214,7 +296,7 @@ export default {
      * @param table_data: 表格数据
      */
     flexColumnWidth(label, prop) {
-      const arr = this.order.orderDetail.map((x) => x[prop]);
+      const arr = this.order.orderDetailList.map((x) => x[prop]);
       if (arr.length > 0) {
         arr.push(label);
         return this.getMaxLength(arr) + 100 + "px";
@@ -252,42 +334,82 @@ export default {
     },
 
     initRow() {
-      const newRow = {}
-      this.tablColumns.forEach(column=>{
-        if(column.type==='number'){
-          newRow[column.valuekey] =0
-        }else{
-          newRow[column.valuekey] =''
+      const newRow = {};
+
+      this.tablColumns.forEach((column) => {
+        if (column.type === "number") {
+          newRow[column.valuekey] = 0;
+        } else {
+          newRow[column.valuekey] = "";
         }
-      })
-        return newRow;
+      });
+
+      return newRow;
     },
     addRow() {
       // 添加一行数据
       const newRow = this.initRow();
-      this.order.orderDetail.push(newRow);
+      this.order.orderDetailList.push(newRow);
     },
     resetRow(row) {
-      Object.keys(row).forEach(key=>{
-        console.log(key,key.indexOf('000'))
-        if(key.indexOf('000')>-1){
-          row[key] = 0
-        }else{
-          row[key] = ''
+      Object.keys(row).forEach((key) => {
+        console.log(key, key.indexOf("000"));
+        if (key.indexOf("000") > -1) {
+          row[key] = 0;
+        } else {
+          row[key] = "";
         }
-        })
+      });
     },
     deleteRow(row) {
       console.log(row);
       // 删除行数据
-      const index = this.order.orderDetail.indexOf(row);
+      const index = this.order.orderDetailList.indexOf(row);
       console.log(index);
       if (index !== -1) {
-        this.order.orderDetail.splice(index, 1);
+        this.order.orderDetailList.splice(index, 1);
       }
     },
+    getCustomFoodList(item) {
+      console.log(item);
+      let custom = {
+        name: item.name,
+        allergies: item.Allergies || "nothing",
+        foodList: [],
+      };
+      for (let key in item) {
+        if (!(key === "Allergies" || key === "name")) {
+          let food = {
+            foodId: key,
+            foodNum: item[key] || 0,
+          };
+          custom.foodList.push(food);
+        }
+      }
+      return custom;
+    },
     submitForm() {
-      console.log(this.order)
+      let requestObj = {
+        tel: this.order.tel,
+        bookingDateTime: this.order.bookingDate + this.hour,
+        bookingName: this.order.bookingName,
+        bookingAddress: this.order.bookingAddress,
+        edamame: this.order.edamame,
+        gyoza: this.order.gyoza,
+        additionalNotes: this.order.additionalNotes,
+      };
+      let orderList = [];
+      this.order.orderDetailList.forEach((item) => {
+        orderList.push(this.getCustomFoodList(item));
+      });
+      requestObj["orderDetailDtoList"] = orderList;
+      axios
+        .post("http://47.95.8.42:6002/api/order/submit", requestObj)
+        .then((result) => {
+          if (result.status == 200 && result.data.rtnCode === 200) {
+            console.log("提交成功");
+          }
+        });
     },
   },
 };
@@ -306,6 +428,7 @@ body {
 .app-container {
   flex: 1;
   padding: 0 5px;
+  overflow: scroll;
 }
 .scroll-container {
   flex: 1;
@@ -350,6 +473,9 @@ el-table-column {
   /* font-size: 30px; */
   line-height: 20em;
 }
+.total-info {
+  margin: 15px 0;
+}
 
 .buttonSubmit {
   width: 40%;
@@ -366,11 +492,17 @@ el-table-column {
 }
 
 .base-info {
-  height: 100px;
-  padding: 10px 0;
+  height: 120px;
+  padding: 10px;
 }
 .flex {
   display: flex;
+}
+.flex-ac {
+  align-items: center;
+}
+.flex-jl {
+  justify-content: left;
 }
 .flex-1 {
   flex: 1;
@@ -378,5 +510,9 @@ el-table-column {
 .label {
   font-size: 14px;
   width: 80px;
+}
+.addtion-title {
+  font-weight: bold;
+  margin: 5px 0;
 }
 </style>
