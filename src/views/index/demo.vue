@@ -6,8 +6,9 @@
          <hy-header :showBack="false" :title="'Code工厂'"></hy-header>
         <hy-scroll >
             <div v-for="(item,index) in demoList" :key="index" @click="goToPage(item)">{{item.name}}</div>
+            <div @click="testHarmoneyApi">鸿蒙测试</div>
         </hy-scroll>
-     
+        
     </div>
 </template>
 
@@ -53,6 +54,10 @@ export default {
         goToPage(item){
             console.log(item)
             this.$router.push({name:item.routerName})
+        },
+        testHarmoneyApi(){
+            console.log(window)
+            console.log(window.cordova)
         }
     },
     mounted(){

@@ -54,7 +54,7 @@ module.exports = defineConfig({
       .minimizer('terser')
       .tap(args => {
         const { terserOptions } = args[0]
-        terserOptions.compress.drop_console = process.env.NODE_ENV !== 'development'
+        terserOptions.compress.drop_console = false
         terserOptions.compress.drop_debugger = process.env.NODE_ENV !== 'development'
         return args
       })
