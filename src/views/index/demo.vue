@@ -57,7 +57,7 @@ export default {
         },
         testHarmoneyApi(){
             console.log(window)
-            console.log(window.cordova)
+            console.log(window.Hormany,'Hormany')
         }
     },
     mounted(){

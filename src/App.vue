@@ -1,11 +1,33 @@
 <template>
   <div id="app">
     <keep-alive>
-    <router-view class="Router hy-Page"></router-view >
+      <router-view class="Router hy-Page"></router-view>
     </keep-alive>
   </div>
 </template>
+<script>
+export default {
+  mounted() {
+    console.log('mounted')
+    window.HarmonyEvent = (state) => {
+      console.log('App state changed:', state);
+      if (state === 'start') {
+        // 应用启动处理
+        console.log('start')
+      } else if (state === 'resume') {
+        // 应用后台唤醒的处理
+        console.log('resume');
+      }
+    };
+    window.addEventListener('message', function (event) {
+      if (event.data === '__init_port__') {
+        console.log('event message', event)
+      }
 
+    })
+  },
+}
+</script>
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -15,14 +37,15 @@
   color: #2c3e50;
 }
 
-.Router{
+.Router {
   transition: all .2s ease-in-out;
 }
+
 .hy-Page {
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: hidden;
-    flex-direction: column;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  flex-direction: column;
 }
 </style>

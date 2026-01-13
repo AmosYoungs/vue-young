@@ -36,8 +36,8 @@ export default {
     };
   },
   mounted(){
-    console.log(4444)
-    console.log(this.images)
+
+
   }
 };
 </script>
