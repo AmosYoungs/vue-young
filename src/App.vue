@@ -7,6 +7,16 @@
 </template>
 <script>
 export default {
+  methods: {
+    serializeWithFunctions(obj){
+      return JSON.stringify(obj, (key, value) => {
+    if (typeof value === 'function') {
+      return value.toString();
+    }
+    return value;
+  });
+    }
+  },
   mounted() {
     console.log('mounted')
     window.HarmonyEvent = (state) => {
@@ -19,12 +29,12 @@ export default {
         console.log('resume');
       }
     };
-    window.addEventListener('message', function (event) {
-      if (event.data === '__init_port__') {
-        console.log('event message', event)
+    let params = this.serializeWithFunctions({
+      callback: function (res){
+        console.log('getAppVersion',res)
       }
-
     })
+    window.TpHarmonyNative.getAppVersion(params)
   },
 }
 </script>
