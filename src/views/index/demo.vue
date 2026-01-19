@@ -57,7 +57,7 @@ export default {
         },
         testHarmoneyApi(){
             console.log(window)
-            console.log(window.Hormany,'Hormany')
+            console.log(window.TpHarmonyNative,'TpHarmonyNative')
         }
     },
     mounted(){

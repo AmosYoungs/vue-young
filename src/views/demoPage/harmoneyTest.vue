@@ -18,8 +18,21 @@ return {
 },
 
 methods:{
+   serializeWithFunctions(obj){
+      return JSON.stringify(obj, (key, value) => {
+    if (typeof value === 'function') {
+      return value.toString();
+    }
+    return value;
+    });
+    },
   openNative(){
-    console.log(window)
+    let params = this.serializeWithFunctions({
+      param:{
+        url:'https://element-plus.org/zh-CN/component/table'
+      }
+    })
+    window.TpHarmonyNative.openBrowser(params)
   }
 },
 
