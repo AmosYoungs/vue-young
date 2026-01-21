@@ -1,51 +1,64 @@
 <template>
   <div class="page">
     <hy-header :title="'鸿蒙测试'"></hy-header>
-    <div @click="openNative">
-      nativeApi调用
+    <div @click="openSystemBrowser">
+      打开系统浏览器
+    </div>
+    <div @click="openCamera">
+      打开相机
     </div>
   </div>
 </template>
 
 <script>
 export default {
-name:'',
-components:{},
-data(){
-return {
+  name: '',
+  components: {},
+  data() {
+    return {
 
-};
-},
+    };
+  },
 
-methods:{
-   serializeWithFunctions(obj){
+  methods: {
+    serializeWithFunctions(obj) {
       return JSON.stringify(obj, (key, value) => {
-    if (typeof value === 'function') {
-      return value.toString();
-    }
-    return value;
-    });
+        if (typeof value === 'function') {
+          return value.toString();
+        }
+        return value;
+      });
     },
-  openNative(){
-    let params = this.serializeWithFunctions({
-      param:{
-        url:'https://element-plus.org/zh-CN/component/table'
-      }
-    })
-    window.TpHarmonyNative.openBrowser(params)
-  }
-},
+    openCamera() {
+      let params = this.serializeWithFunctions({
+        param: {
+          type: 'camera',
+          callback: (res) => {
+            console.log('camera',res)
+          }
+        }
+      })
+      window.TpHarmonyNative.getPhoto(params)
+    },
+    openSystemBrowser() {
+      let params = this.serializeWithFunctions({
+        param: {
+          url: 'https://element-plus.org/zh-CN/component/table'
+        }
+      })
+      window.TpHarmonyNative.openBrowser(params)
+    }
+  },
 
-created(){
+  created() {
 
-},
+  },
 
-mounted(){
+  mounted() {
 
-},
+  },
 
 }
 
 </script>
-<style lang='less' scoped>
-</style>
+<style lang='less' scoped></style>
