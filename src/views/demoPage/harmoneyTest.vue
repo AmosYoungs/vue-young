@@ -4,9 +4,10 @@
     <div @click="openSystemBrowser">
       打开系统浏览器
     </div>
-    <div @click="openCamera">
+    <div @click="openCamera('camera')">
       打开相机
     </div>
+    <div @click="openCamera('album')">打开相册</div>
   </div>
 </template>
 
@@ -29,13 +30,14 @@ export default {
         return value;
       });
     },
-    openCamera() {
+    openCamera(type) {
       let params = this.serializeWithFunctions({
         param: {
-          type: 'camera',
-          callback: (res) => {
+          type,
+          quality:98,
+        },
+        callback: function(res)  {
             console.log('camera',res)
-          }
         }
       })
       window.TpHarmonyNative.getPhoto(params)
