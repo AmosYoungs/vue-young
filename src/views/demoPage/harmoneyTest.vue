@@ -8,6 +8,7 @@
       打开相机
     </div>
     <div @click="openCamera('album')">打开相册</div>
+    <div @click="bioCheck()">生物识别</div>
   </div>
 </template>
 
@@ -49,6 +50,14 @@ export default {
         }
       })
       window.TpHarmonyNative.openBrowser(params)
+    },
+    bioCheck() {
+      let params = this.serializeWithFunctions({
+        callback: function(res)  {
+            console.log('bioCheck',res)
+        }
+      })
+      window.TpHarmonyNative.biometricAuthentic(params)
     }
   },
 
